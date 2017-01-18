@@ -2,6 +2,7 @@ class IngredientsController < ApplicationController
 
   get '/ingredients/new' do
     if logged_in?
+      @current_user_recipes = current_user.recipes
       erb :'ingredients/new'
     else
       redirect to '/login'
@@ -13,7 +14,7 @@ class IngredientsController < ApplicationController
       redirect to "/ingredients/new"
     else
       @ingredient = Ingredient.new(name: params[:name])
-      @ingredient.recipe = Recipe.find_by_id(params[:recipe_id]
+      @ingredient.recipe = Recipe.find_by_id(params[:recipe_id])
       @ingredient.save
       redirect to "/ingredients/#{@ingredient.id}"
     end
@@ -58,7 +59,7 @@ class IngredientsController < ApplicationController
       puts "Params: " + params.to_s
       @ingredient = Ingredient.find_by_id(params[:id])
       @ingredient.name = params[:name]
-      @ingredient.recipe = Recipe.find_by_id(params[:recipe_id]
+      @ingredient.recipe = Recipe.find_by_id(params[:recipe_id])
       @ingredient.save
       redirect to "/ingredients/#{@ingredient.id}"
     end

@@ -10,9 +10,8 @@
   </thead>
 
   <tbody>
-
-    <tr>
-      <% @recipes.each do |recipe| %>
+    <% @recipes.each do |recipe| %>
+      <tr>
         <td><%= recipe.name %></td>
         <td><a href="/recipes/<%= recipe.id %>">Show</a></td>
         <td>
@@ -20,8 +19,8 @@
             <a href="/recipes/<%= recipe.id %>/edit">Edit</a>
           <% end %>
         </td>
-      <% end %>
-    </tr>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
