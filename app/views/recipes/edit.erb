@@ -1,0 +1,13 @@
+<h1>Edit Recipe</h1>
+
+<form method="post" action="/recipes/<%=@recipe.id%>">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <p>Name: </br>
+    <input type="text" name="name" value="<%= @recipe.name %>">
+  </p>
+  <p>
+    <input class="btn btn-primary" type="submit" value="Save Recipe">
+  </p>
+</form>
+
+<a href="/recipes">Back</a>

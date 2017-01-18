@@ -9,10 +9,10 @@ class RecipesController < ApplicationController
   end
 
   post '/recipes' do
-    if params[:content] == ""
+    if params[:name] == ""
       redirect to "/recipes/new"
     else
-      @recipe = current_user.recipes.create(content: params[:content])
+      @recipe = current_user.recipes.create(name: params[:name])
       redirect to "/recipes/#{@recipe.id}"
     end
   end
@@ -50,11 +50,11 @@ class RecipesController < ApplicationController
   end
 
   patch '/recipes/:id' do
-    if params[:content] == ""
+    if params[:name] == ""
       redirect to "/recipes/#{params[:id]}/edit"
     else
       @recipe = Recipe.find_by_id(params[:id])
-      @recipe.content = params[:content]
+      @recipe.name = params[:name]
       @recipe.save
       redirect to "/recipes/#{@recipe.id}"
     end
