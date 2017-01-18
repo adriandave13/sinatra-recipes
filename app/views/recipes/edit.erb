@@ -2,12 +2,21 @@
 
 <form method="post" action="/recipes/<%=@recipe.id%>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <p>Name: </br>
+
+  <p>
+    <label>Name</label></br>
     <input type="text" name="name" value="<%= @recipe.name %>">
   </p>
+
+  <p>
+    <label>Instructions</label></br>
+    <textarea rows="4" cols="50" name="instructions"><%= @recipe.instructions %></textarea>
+  </p>
+
   <p>
     <input class="btn btn-primary" type="submit" value="Save Recipe">
   </p>
+
 </form>
 
 <a href="/recipes">Back</a>

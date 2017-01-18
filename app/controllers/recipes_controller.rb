@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
     if params[:name] == ""
       redirect to "/recipes/new"
     else
-      @recipe = current_user.recipes.create(name: params[:name])
+      @recipe = current_user.recipes.create(name: params[:name], instructions: params[:instructions])
       redirect to "/recipes/#{@recipe.id}"
     end
   end
@@ -53,8 +53,10 @@ class RecipesController < ApplicationController
     if params[:name] == ""
       redirect to "/recipes/#{params[:id]}/edit"
     else
+      puts "Params: " + params.to_s
       @recipe = Recipe.find_by_id(params[:id])
       @recipe.name = params[:name]
+      @recipe.instructions = params[:instructions]
       @recipe.save
       redirect to "/recipes/#{@recipe.id}"
     end
