@@ -9,7 +9,7 @@
 
   <p>
     <label>Recipe</label></br>
-      <select>
+      <select name="recipe_id">
         <% @current_user_recipes.each do |recipe| %>
           <option value="<%= recipe.id %>"><%= recipe.name %></option>
         <% end %>

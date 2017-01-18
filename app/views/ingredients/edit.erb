@@ -1,0 +1,30 @@
+<h1>Edit Ingredient</h1>
+
+<form method="post" action="/ingredients/<%=@ingredient.id%>">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+
+  <p>
+    <label>Name</label></br>
+    <input type="text" name="name" value="<%= @ingredient.name %>">
+  </p>
+
+  <p>
+    <label>Recipe</label></br>
+      <select name="recipe_id">
+        <% @current_user_recipes.each do |recipe| %>
+          <% if recipe.id == @ingredient.recipe.id %>
+            <option value="<%= recipe.id %>" selected="selected"><%= recipe.name %></option>
+          <% else %>
+            <option value="<%= recipe.id %>"><%= recipe.name %></option>
+          <% end %>
+        <% end %>
+      </select>
+  </p>
+
+  <p>
+    <input class="btn btn-primary" type="submit" value="Save Ingredient">
+  </p>
+
+</form>
+
+<a href="/ingredients">Back</a>

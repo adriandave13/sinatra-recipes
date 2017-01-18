@@ -42,7 +42,7 @@ class IngredientsController < ApplicationController
   get '/ingredients/:id/edit' do
     if logged_in?
       @ingredient = Ingredient.find_by_id(params[:id])
-      if @ingredient.user_id == current_user.id
+      if @ingredient.recipe.user.id == current_user.id
        erb :'ingredients/edit'
       else
         redirect to '/ingredients'
@@ -68,7 +68,7 @@ class IngredientsController < ApplicationController
   delete '/ingredients/:id/delete' do
     if logged_in?
       @ingredient = Ingredient.find_by_id(params[:id])
-      if @ingredient.user_id == current_user.id
+      if @ingredient.recipe.user.id == current_user.id
         @ingredient.delete
         redirect to '/ingredients'
       else
