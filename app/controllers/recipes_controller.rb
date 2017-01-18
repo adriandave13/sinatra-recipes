@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
 
   get '/recipes/new' do
     if logged_in?
-      erb :'recipes/create_recipe'
+      erb :'recipes/new'
     else
       redirect to '/login'
     end
@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
     if logged_in?
       @recipe = Recipe.find_by_id(params[:id])
       @ingredients = @recipe.ingredients
-      erb :'recipes/show_recipe'
+      erb :'recipes/show'
     else
       redirect to '/login'
     end
@@ -30,7 +30,7 @@ class RecipesController < ApplicationController
   get '/recipes' do
     if logged_in?
       @recipes = Recipe.all
-      erb :'recipes/recipes'
+      erb :'recipes/index'
     else
       redirect to '/login'
     end
@@ -40,7 +40,7 @@ class RecipesController < ApplicationController
     if logged_in?
       @recipe = Recipe.find_by_id(params[:id])
       if @recipe.user_id == current_user.id
-       erb :'recipes/edit_recipe'
+       erb :'recipes/edit'
       else
         redirect to '/recipes'
       end
