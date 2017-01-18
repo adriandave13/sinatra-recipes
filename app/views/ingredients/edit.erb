@@ -9,7 +9,7 @@
   </p>
 
   <p>
-    <label>Recipe</label></br>
+    <label>Used In Recipe</label></br>
       <select name="recipe_id">
         <% @current_user_recipes.each do |recipe| %>
           <% if recipe.id == @ingredient.recipe.id %>
