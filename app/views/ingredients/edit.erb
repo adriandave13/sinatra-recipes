@@ -1,3 +1,13 @@
+<% if @ingredient.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @ingredient.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h1>Edit Ingredient</h1>
 
 <form method="post" action="/ingredients/<%=@ingredient.id%>">

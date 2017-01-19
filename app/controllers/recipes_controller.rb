@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
 
   get '/recipes/new' do
     if logged_in?
+      @recipe ||= Recipe.new
       erb :'recipes/new'
     else
       redirect to '/login'
@@ -9,11 +10,11 @@ class RecipesController < ApplicationController
   end
 
   post '/recipes' do
-    if params[:name] == ""
-      redirect to "/recipes/new"
-    else
-      @recipe = current_user.recipes.create(name: params[:name], instructions: params[:instructions])
+    @recipe = current_user.recipes.new(name: params[:name], instructions: params[:instructions])
+    if @recipe.save
       redirect to "/recipes/#{@recipe.id}"
+    else
+      erb :'/recipes/new'
     end
   end
 
@@ -40,7 +41,7 @@ class RecipesController < ApplicationController
     if logged_in?
       @recipe = Recipe.find_by_id(params[:id])
       if @recipe.user_id == current_user.id
-       erb :'recipes/edit'
+        erb :'recipes/edit'
       else
         redirect to '/recipes'
       end
@@ -50,15 +51,13 @@ class RecipesController < ApplicationController
   end
 
   patch '/recipes/:id' do
-    if params[:name] == ""
-      redirect to "/recipes/#{params[:id]}/edit"
-    else
-      puts "Params: " + params.to_s
-      @recipe = Recipe.find_by_id(params[:id])
-      @recipe.name = params[:name]
-      @recipe.instructions = params[:instructions]
-      @recipe.save
+    @recipe = Recipe.find_by_id(params[:id])
+    @recipe.name = params[:name]
+    @recipe.instructions = params[:instructions]
+    if @recipe.save
       redirect to "/recipes/#{@recipe.id}"
+    else
+      erb :'/recipes/edit'
     end
   end
 
