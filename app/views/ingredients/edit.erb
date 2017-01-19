@@ -11,7 +11,7 @@
   <p>
     <label>Used In Recipe</label></br>
       <select name="recipe_id">
-        <% @current_user_recipes.each do |recipe| %>
+        <% current_user.recipes.each do |recipe| %>
           <% if recipe.id == @ingredient.recipe.id %>
             <option value="<%= recipe.id %>" selected="selected"><%= recipe.name %></option>
           <% else %>
@@ -27,4 +27,4 @@
 
 </form>
 
-<a href="/ingredients">Back</a>
+<a href="/recipes">Back to Recipes</a>

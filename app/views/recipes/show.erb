@@ -6,12 +6,39 @@
 </p>
 
 <p>
+  <label>Ingredients</label><br />
+</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipe.ingredients.each do |ingredient| %>
+      <tr>
+        <td><%= ingredient.name %></td>
+        <td><a href="/ingredients/<%= ingredient.id %>">Show</a></td>
+        <td><a href="/ingredients/<%= ingredient.id %>/edit">Edit</a></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <a href="/ingredients/new">Add Ingredient</a>
+</p>
+
+<p>
+  <a href="/recipes/<%=@recipe.id%>/edit">Edit Recipe Info</a>
+</p>
+
+<p>
   <form method="post" action="/recipes/<%=@recipe.id%>/delete">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
     <input class="btn btn-danger" type="submit" value="Delete Recipe">
   </form>
-</p>
-
-<p>
-  <a href="/recipes/<%=@recipe.id%>/edit">Edit Recipe</a>
 </p>

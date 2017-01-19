@@ -30,15 +30,6 @@ class IngredientsController < ApplicationController
     end
   end
 
-  get '/ingredients' do
-    if logged_in?
-      @ingredients = Ingredient.all
-      erb :'ingredients/index'
-    else
-      redirect to '/login'
-    end
-  end
-
   get '/ingredients/:id/edit' do
     if logged_in?
       @ingredient = Ingredient.find_by_id(params[:id])
